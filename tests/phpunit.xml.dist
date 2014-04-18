@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- http://www.phpunit.de/manual/current/en/appendixes.configuration.html -->
+<phpunit
+    backupGlobals               = "false"
+    backupStaticAttributes      = "false"
+    colors                      = "true"
+    convertErrorsToExceptions   = "true"
+    convertNoticesToExceptions  = "true"
+    convertWarningsToExceptions = "true"
+    processIsolation            = "false"
+    stopOnFailure               = "false"
+    strict                      = "false"
+    syntaxCheck                 = "false"
+    verbose                     = "true"
+    bootstrap                   = "./bootstrap.php">
+
+    <testsuite name="Nginx Conf Test Suite">
+        <directory>./</directory>
+    </testsuite>
+
+    <filter>
+        <whitelist addUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">../src/</directory>
+        </whitelist>
+    </filter>
+
+    <logging>
+    <!-- clover report is used by ./bin/coverage-checker.php -->
+    <log type="coverage-clover" target="../build/logs/clover.xml" />
+    <log type="coverage-text" target="php://stdout" showOnlySummary="true" />
+    </logging>
+</phpunit>
