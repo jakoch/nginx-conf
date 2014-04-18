@@ -1,0 +1,21 @@
+{
+    "name": "jakoch/nginx-conf",
+    "description": "A Nginx Conf parser and generator.",
+    "type": "library",
+    "keywords": ["nginx", "config", "parser", "generator", "utils", "tools"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jens-André Koch",
+            "email": "jakoch@web.de"
+        }
+    ],
+    "require": {
+        "php": ">=5.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "jakoch\\NginxConf\\": "src/"
+        }
+    }
+}

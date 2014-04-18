@@ -1,0 +1,74 @@
+#
+# .gitignore
+#
+# Ignore works for the dir the gitignore file resides in.
+# To have a global effect affect to all repositories run this command:
+# git config --global core.excludesfile ~/.gitignore
+
+# removed .gitattributes and .gitignore when doing git export
+.gitattributes export-ignore
+.gitignore export-ignore
+.travis.yml export-ignore
+.scrutinzer.yml export-ignore
+.coveralls.io export-ignore
+.php_cs export-ignore
+phpmd.xml export-ignore
+phpunit.xml.dist export-ignore
+/tests export-ignore
+
+# Mac OS X Finder and whatnot
+.DS_Store
+
+# Windows crap
+Thumbs.db
+
+# Netbeans IDE related
+nbproject
+
+# Eclipse IDE related
+.cache*
+.project
+.settings*
+.buildpath
+
+# PHPStorm IDE related
+/.idea
+/.buildpath
+/.project
+/.settings
+
+# Webserver
+/.htaccess
+
+# Scriptfiles
+*.log
+
+# Subversion
+.svn
+.svn/entries
+
+# Mercurial / Subversion
+.hg
+.svn
+
+# PHPUnit
+# phpunit.xml
+
+# PHP composer related
+composer.lock
+vendor
+
+# php-cs-fixer
+php-cs-fixer*.txt
+
+# build folders for standard php projects
+build/api
+build/code-browser
+build/coverage
+build/logs
+build/pdepend
+
+# various files
+._*
+.~lock.*
+*.bak
