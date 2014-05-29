@@ -31,7 +31,7 @@ class Parser
     public function parse($file = '')
     {
         $this->file = ($file !== '') ? $file : $this->file;
-        echo 'Reading ' . $this->file;
+        #aecho 'Reading ' . $this->file;
 
         $this->source  = file_get_contents($this->file);
         $this->index   = 0;
@@ -42,12 +42,16 @@ class Parser
         do {
             $this->parseNext();
             if ($this->error) {
-                print_r($this->error);
+                throw new \Exception(
+                    sprintf('Parsing Error: %s', $this->error)
+                );
                 return;
             }
         } while ($this->index < strlen($this->source));
 
-        print_r($this->tree);
+        #print_r($this->tree);
+        
+        return $this->tree;
     }
 
     function parseNext()
