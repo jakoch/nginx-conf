@@ -87,7 +87,7 @@ class Parser
             case "\n":
             case "\r":
                 if ($this->context->value) {
-                    $this->context->value += $c;
+                    $this->context->value .= $c;
                 }
                 $this->index++;
                 break;
@@ -98,7 +98,7 @@ class Parser
                     return;
                 }
 
-                $this->context->value += $this->readString();
+                $this->context->value .= $this->readString();
                 break;
             case '#':
                 $this->context->comments[] = $this->readComment();
@@ -113,7 +113,7 @@ class Parser
                         $this->index += strlen($matches[0]);
                     }
                 } else {
-                    $this->context->value += $value;
+                    $this->context->value .= $value;
                 }
                 break;
         }
@@ -146,17 +146,18 @@ class Parser
 
         for ($i = $pos; $i < $length; $i++) {
             if ($this->source{$i} === '\\') {
-                $value += $this->source{$i} + $this->source{($i + 1)};
+                $value .= $this->source{$i} + $this->source{($i + 1)};
                 $i++;
                 continue;
             }
 
+            // break out, when reaching the ending delimiter
             if ($this->source{$i} === $delimiter) {
-                $value += $delimiter;
+                $value .= $delimiter;
                 break;
             }
 
-            $value += $this->source{$i};
+            $value .= $this->source{$i};
         }
 
         if (strlen($value) < 2 || $value{(strlen($value) - 1)} !== $delimiter) {

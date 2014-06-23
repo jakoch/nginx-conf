@@ -43,51 +43,40 @@ class ParserTest extends \PHPUnit_Framework_TestCase
 
     public function testParser_NginxConf()
     {
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
-
         $conf   = __DIR__ . '/fixtures/nginx.conf';
         $parser = new Parser($conf);
-        $array  = $parser->parse();
+        $object = $parser->parse();
 
-        $expected_array = array(
-            'type'  => 'param',
-            'name'  => 'worker_processes',
-            'value' => 1
-        );
-
-        $this->assertSame($expected_array, $array);
+        $this->assertObjectHasAttribute('name', $object);
+        $this->assertSame('[root]', $object->name);
     }
 
     public function testParser_Nginx2Conf()
     {
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
-
         $conf   = __DIR__ . '/fixtures/nginx-2.conf';
         $parser = new Parser($conf);
-        $array  = $parser->parse();
+         $object = $parser->parse();
 
-        $expected_array = array(
-            'type'  => 'param',
-            'name'  => 'worker_processes',
-            'value' => 1
-        );
-
-        $this->assertSame($expected_array, $array);
+        $this->assertObjectHasAttribute('name', $object);
+        $this->assertSame('[root]', $object->name);
     }
 
     public function testParser_NginxKibanaConf()
     {
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
-
         $conf   = __DIR__ . '/fixtures/nginx-kibana.conf';
         $parser = new Parser($conf);
-        $array  = $parser->parse();
+        $object = $parser->parse();
+
+        $this->assertSame(count($object->children), 1); # root has 1 child: server
+        $this->assertSame($object->children[0]->name, 'server');
+
+        $this->assertSame(count($object->children[0]->children), 11); # the "server node" has 11 child nodes
+
+        $this->assertSame($object->children[0]->children[2]->name,'access_log');
+        $this->assertSame($object->children[0]->children[2]->value, '/var/log/nginx/kibana.myhost.org.access.log');
+
+        $this->assertSame($object->children[0]->children[9]->children[0]->name, 'proxy_pass');
+        $this->assertSame($object->children[0]->children[9]->children[0]->value, 'http://127.0.0.1:9200');
     }
 
 }
