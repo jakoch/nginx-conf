@@ -43,8 +43,12 @@ class Parser
             $this->parseNext();
             if ($this->error) {
                 throw new \Exception(
-                    sprintf('Parsing Error: %s', $this->error)
-                );
+                    sprintf(
+                        'Parsing Error on line %s, column %s: %s.',
+                        $this->error['line'],
+                        $this->error['column'],
+                        $this->error['message']
+                    ));
                 return;
             }
         } while ($this->index < strlen($this->source));
