@@ -145,7 +145,7 @@ class Parser
         $length = strlen($this->source);
 
         for ($i = $pos; $i < $length; $i++) {
-            if ($this->source{$i} === '\\') {
+            if ($this->source{$i} === "\\" && $this->source{($i + 1)} !== ".") {
                 $value .= $this->source{$i} + $this->source{($i + 1)};
                 $i++;
                 continue;
@@ -159,8 +159,9 @@ class Parser
 
             $value .= $this->source{$i};
         }
-
+        
         if (strlen($value) < 2 || $value{(strlen($value) - 1)} !== $delimiter) {
+            echo $value;
             $this->setError('Unable to parse quote-delimited value (probably an unclosed string)');
             return '';
         }

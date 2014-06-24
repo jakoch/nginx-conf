@@ -55,7 +55,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
     {
         $conf   = __DIR__ . '/fixtures/nginx-2.conf';
         $parser = new Parser($conf);
-         $object = $parser->parse();
+        $object = $parser->parse();
 
         $this->assertObjectHasAttribute('name', $object);
         $this->assertSame('[root]', $object->name);
@@ -77,6 +77,17 @@ class ParserTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame($object->children[0]->children[9]->children[0]->name, 'proxy_pass');
         $this->assertSame($object->children[0]->children[9]->children[0]->value, 'http://127.0.0.1:9200');
+    }
+
+    public function testParser_NginxSSL()
+    {
+        $conf   = __DIR__ . '/fixtures/nginx-ssl.conf';
+        $parser = new Parser($conf);
+        $object = $parser->parse();
+
+        $this->assertObjectHasAttribute('name', $object);
+        $this->assertSame('[root]', $object->name);
+
     }
 
 }
