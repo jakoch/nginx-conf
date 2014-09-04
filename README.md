@@ -7,3 +7,5 @@ nginx-conf
 [![License](https://poser.pugx.org/jakoch/nginx-conf/license.png)](https://packagist.org/packages/jakoch/nginx-conf)
 
 A Nginx Config parser and generator.
+
+**Work in progress. Parser works. Generator not. Contributions welcome...**
