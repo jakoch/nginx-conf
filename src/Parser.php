@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the "jakoch/nginx-conf" package.
+ *
+ * Copyright (c) Jens-André Koch <jakoch@web.de>
+ *
+ * The content is released under the MIT License. Please view 
+ * the LICENSE file that was distributed with this source code.
+ */
+
 namespace NginxConf;
 
 /**
