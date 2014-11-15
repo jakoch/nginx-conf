@@ -31,7 +31,6 @@ class Parser
     public function parse($file = '')
     {
         $this->file = ($file !== '') ? $file : $this->file;
-        #aecho 'Reading ' . $this->file;
 
         $this->source  = file_get_contents($this->file);
         $this->index   = 0;
