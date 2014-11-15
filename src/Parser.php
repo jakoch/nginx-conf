@@ -3,9 +3,9 @@
 /*
  * This file is part of the "jakoch/nginx-conf" package.
  *
- * Copyright (c) Jens-André Koch <jakoch@web.de>
+ * Copyright (c) 2013-2014 Jens-André Koch <jakoch@web.de>
  *
- * The content is released under the MIT License. Please view 
+ * The content is released under the MIT License. Please view
  * the LICENSE file that was distributed with this source code.
  */
 
@@ -62,7 +62,7 @@ class Parser
         } while ($this->index < strlen($this->source));
 
         #print_r($this->tree);
-        
+
         return $this->tree;
     }
 
@@ -167,7 +167,7 @@ class Parser
 
             $value .= $this->source{$i};
         }
-        
+
         if (strlen($value) < 2 || $value{(strlen($value) - 1)} !== $delimiter) {
             echo $value;
             $this->setError('Unable to parse quote-delimited value (probably an unclosed string)');
