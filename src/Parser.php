@@ -170,7 +170,7 @@ class Parser
 
         if (strlen($value) < 2 || $value{(strlen($value) - 1)} !== $delimiter) {
             echo $value;
-            $this->setError('Unable to parse quote-delimited value (probably an unclosed string)');
+            $this->setError('Unable to parse quote-delimited value (probably an unclosed string).');
             return '';
         }
 
