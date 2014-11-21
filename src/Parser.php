@@ -43,12 +43,12 @@ class Parser
 
         $this->source  = file_get_contents($this->file);
         $this->index   = 0;
-        $this->tree    = new TreeNode('[root]');
-        $this->context = new TreeNode(null, null, $this->tree);
+        $this->tree    = new Node('[root]');
+        $this->context = new Node(null, null, $this->tree);
         $this->error   = null;
 
         do {
-            $this->parseNext();
+            $this->parseNextToken();
             if ($this->error) {
                 throw new \Exception(
                     sprintf(
@@ -66,7 +66,7 @@ class Parser
         return $this->tree;
     }
 
-    function parseNext()
+    function parseNextToken()
     {
         $c = $this->source{$this->index};
 
@@ -84,12 +84,12 @@ class Parser
                 $this->context->value = trim( $this->context->value );
                 $this->context->parent->children[] = $this->context;
                 //new context is child of current context, or a sibling to the parent
-                $this->context = new TreeNode(null, null, $c === '{' ? $this->context : $this->context->parent);
+                $this->context = new Node(null, null, $c === '{' ? $this->context : $this->context->parent);
                 $this->index++;
                 break;
             case '}':
                 //new context is sibling to the parent
-                $this->context = new TreeNode(null, null, $this->context->parent->parent);
+                $this->context = new Node(null, null, $this->context->parent->parent);
                 $this->index++;
                 break;
             case "\n":
@@ -207,7 +207,7 @@ class Parser
 
 }
 
-class TreeNode
+class Node
 {
     public $name;
     public $value;
