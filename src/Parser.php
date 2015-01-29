@@ -52,8 +52,8 @@ class Parser
             if (is_array($this->error) === true) {
                 throw new \Exception(
                 sprintf(
-                    'Parsing Error on line %s, column %s: %s.', 
-                    $this->error['line'], 
+                    'Parsing Error on line %s, column %s: %s.',
+                    $this->error['line'],
                     $this->error['column'],
                     $this->error['message']
                 ));
@@ -61,7 +61,7 @@ class Parser
             }
         } while ($this->index < strlen($this->source));
 
-        print_r($this->tree);
+        // print_r($this->tree);
 
         return $this->tree;
     }
