@@ -49,19 +49,19 @@ class Parser
 
         do {
             $this->parseNextToken();
-            if ($this->error) {
+            if (is_array($this->error) === true) {
                 throw new \Exception(
-                    sprintf(
-                        'Parsing Error on line %s, column %s: %s.',
-                        $this->error['line'],
-                        $this->error['column'],
-                        $this->error['message']
-                    ));
+                sprintf(
+                    'Parsing Error on line %s, column %s: %s.', 
+                    $this->error['line'], 
+                    $this->error['column'],
+                    $this->error['message']
+                ));
                 return;
             }
         } while ($this->index < strlen($this->source));
 
-        #print_r($this->tree);
+        print_r($this->tree);
 
         return $this->tree;
     }
@@ -70,7 +70,7 @@ class Parser
     {
         $c = $this->source{$this->index};
 
-        //echo 'Current Token = "' . $c . '"' . PHP_EOL;
+        // echo 'Current Token = "' . $c . '"' . PHP_EOL;
 
         $value = '';
 
@@ -83,12 +83,12 @@ class Parser
             case ';':
                 $this->context->value = trim( $this->context->value );
                 $this->context->parent->children[] = $this->context;
-                //new context is child of current context, or a sibling to the parent
+                // new context is child of current context, or a sibling to the parent
                 $this->context = new Node(null, null, $c === '{' ? $this->context : $this->context->parent);
                 $this->index++;
                 break;
             case '}':
-                //new context is sibling to the parent
+                // new context is sibling to the parent
                 $this->context = new Node(null, null, $this->context->parent->parent);
                 $this->index++;
                 break;
@@ -115,7 +115,7 @@ class Parser
                 $value = $this->readWord();
                 if (!$this->context->name) {
                     $this->context->name = trim($value);
-                    //read trailing whitespace
+                    // read trailing whitespace
                     $ws = preg_match('/^\s*/', substr($this->source, $this->index), $matches);
                     if ($ws) {
                         $this->index += strlen($matches[0]);
@@ -130,11 +130,11 @@ class Parser
     function setError($message)
     {
         // determine current "line number" and "column" (index pos on last line)
-        $source = substr($this->source, 0, $this->index);
-        $lines = explode("\n", $source);
-        $line = count($lines);
+        $source   = substr($this->source, 0, $this->index);
+        $lines    = explode("\n", $source);
+        $line     = count($lines);
         $lastline = end($lines);
-        $column = strlen($lastline);
+        $column   = strlen($lastline);
 
         $this->error = array(
             'message' => $message,
