@@ -90,4 +90,13 @@ class ParserTest extends \PHPUnit_Framework_TestCase
 
     }
 
+    public function testParser_Regex()
+    {
+        $conf   = __DIR__ . '/fixtures/regex.conf';
+        $parser = new Parser($conf);
+        $object = $parser->parse();
+
+        $this->assertSame('"([\w+])" $1 last', $object->children[0]->children[0]->value);
+    }
+
 }

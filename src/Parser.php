@@ -154,7 +154,7 @@ class Parser
 
         for ($i = $pos; $i < $length; $i++) {
             if ($this->source{$i} === "\\" && $this->source{($i + 1)} !== ".") {
-                $value .= $this->source{$i} + $this->source{($i + 1)};
+                $value .= $this->source{$i} . $this->source{($i + 1)};
                 $i++;
                 continue;
             }
