@@ -9,3 +9,10 @@ nginx-conf
 A Nginx Config parser and generator.
 
 **Work in progress. Parser works. Generator not. Contributions welcome...**
+
+**Todo**
+
+- [x] Parser → Tree
+- [ ] Tree → TreeWalker
+- [ ] TreeWalker → PrettyPrinter (Tree to Text)
+- [ ] Generator → TreeWalker -> Tree (insert new Nodes, e.g single directive; server block)
